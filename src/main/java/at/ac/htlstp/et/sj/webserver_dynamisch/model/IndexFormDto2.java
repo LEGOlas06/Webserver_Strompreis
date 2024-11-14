@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class IndexFormDto {
-    private String feld="xx";
+public class IndexFormDto2 {
+    private String feld2="xx";
 
 }
