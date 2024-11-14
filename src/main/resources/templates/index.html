@@ -12,15 +12,7 @@
 <form method="post" th:action="@{/res}" th:object="${data}">
     <label>Feld:</label>
     <input type="text" th:field="*{feld}" /><br/>
-
-    <label>Feld2:</label>
-    <input type="text" th:field="*{feld2}" /><br/>
-
-    <label>Feld3:</label>
-    <input type="text" th:field="*{feld3}" /><br/>
-
     <button type="submit">OK</button>
-</form>
 
 </body>
 </html>
