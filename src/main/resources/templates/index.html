@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Form Example</title>
 </head>
 <body>
-<h1 th:text="${msg}"/>
+<h1>Rechtwinkeliger Dreiecks Rechner</h1>
+
+<h1 th:text="${msg}"></h1>
 <form method="post" th:action="@{/res}" th:object="${data}">
-    <label>Feld:</label>
-    <input type="text" th:field="{feld}" /><br/>
+    <label>Seite A:</label>
+    <input type="text" th:field="*{feld}" /><br/>
 
-    <label>Feld2:</label>
-    <input type="text" th:field="{feld2}" /><br/>
+    <label>Seite B:</label>
+    <input type="text" th:field="*{feld2}" /><br/>
 
-    <label>Feld3:</label>
+    <label>Seite C:</label>
     <input type="text" th:field="*{feld3}" /><br/>
-
+<br/>
     <button type="submit">OK</button>
 </form>
-
+<br/>
+<h0 th:text="${msg1}"></h0><br/>
+<h0 th:text="${msg2}"></h0><br/>
+<h0 th:text="${msg3}"></h0><br/>
 </body>
 </html>

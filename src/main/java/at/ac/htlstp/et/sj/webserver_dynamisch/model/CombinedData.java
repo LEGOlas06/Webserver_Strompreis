@@ -1,9 +1,9 @@
 package at.ac.htlstp.et.sj.webserver_dynamisch.model;
 
 public class CombinedData {
-    private String feld;
-    private String feld2;
-    private String feld3;
+    private String feld = "0";
+    private String feld2 = "0";
+    private String feld3 = "0";
 
     // Getters and setters
     public String getFeld() {
