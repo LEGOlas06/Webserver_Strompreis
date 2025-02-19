@@ -44,6 +44,7 @@
     <button type="submit">Preise Laden</button>
 </form>
 
+
 <div th:if="${error}">
     <p style="color: red;" th:text="${error}"></p>
 </div>
@@ -67,10 +68,10 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Marktpreis',
+                    label: 'Marktpreis in €/MWh',
                     data: dataPoints,
-                    borderColor: 'blue',
-                    backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                    borderColor: 'rgba(128,207,0,255)',
+                    backgroundColor: 'rgba(128,207,0,0.1)',
                     fill: true,
                     tension: 0.1
                 }]
@@ -80,13 +81,13 @@
                     x: {
                         title: {
                             display: true,
-                            text: 'Start Zeit'
+                            text: 'Start Zeit in h'
                         }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'Marktpreis'
+                            text: 'Marktpreis in €/MWh'
                         }
                     }
                 }
