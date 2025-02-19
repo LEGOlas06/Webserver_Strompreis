@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <title>Strompreisdaten</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 1em 0;
+        }
+
+        table, th, td {
+            border: 1px solid #888;
+        }
+
+        th, td {
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 1em;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+
+        input[type="datetime-local"] {
+            width: 250px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<h1>Strompreisdaten</h1>
+
+<form method="post" th:action="@{/prices}" th:object="${priceForm}">
+    <label>Von:</label>
+    <input type="datetime-local" th:field="*{from}" placeholder="2025-02-19T00:00:00"/><br/><br/>
+    <label>Bis:</label>
+    <input type="datetime-local" th:field="*{to}" placeholder="2025-02-19T23:59:59"/><br/><br/>
+    <button type="submit">Preise Laden</button>
+</form>
+
+<div th:if="${error}">
+    <p style="color: red;" th:text="${error}"></p>
+</div>
+
+<div th:if="${prices}">
+    <h2>Preis Graph</h2>
+    <canvas id="priceChart" width="800" height="400"></canvas>
+
+    <script th:inline="javascript">
+        var priceData = [[${prices}]];
+        var labels = priceData.map(function (item) {
+            return new Date(item.start_timestamp).toLocaleString();
+        });
+        var dataPoints = priceData.map(function (item) {
+            return item.marketprice;
+        });
+
+        var ctx = document.getElementById('priceChart').getContext('2d');
+        var priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Marktpreis',
+                    data: dataPoints,
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Start Zeit'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Marktpreis'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</div>
+</body>
+</html>
